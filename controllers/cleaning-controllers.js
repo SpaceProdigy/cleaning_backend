@@ -11,7 +11,7 @@ import {
 import { controllerWrapper } from "../decorators/index.js";
 
 const getList = async (req, res) => {
-  const data = await allSchedules();
+  const data = await allSchedules(req.query);
   res.json(data);
 };
 
@@ -22,19 +22,29 @@ const getById = async (req, res) => {
 };
 
 const add = async (req, res) => {
-  const result = await addSchedule(req.body);
+  const result = await addSchedule({
+    newItem: req.body,
+    nameCollection: req.params.dinamicCleaningRoute,
+  });
   res.status(201).json(result);
 };
 
 const updateById = async (req, res) => {
-  const { id } = req.params;
-  const result = await updateScheduleById(id, req.body);
+  const { id, dinamicCleaningRoute } = req.params;
+  const result = await updateScheduleById({
+    itemId: id,
+    item: req.body,
+    nameCollection: dinamicCleaningRoute,
+  });
   res.json(result);
 };
 
 const deleteById = async (req, res) => {
-  const { id } = req.params;
-  const result = await deleteScheduleById(id);
+  const { id, dinamicCleaningRoute } = req.params;
+  const result = await deleteScheduleById({
+    itemId: id,
+    nameCollection: dinamicCleaningRoute,
+  });
   res.json(result);
 };
 
