@@ -6,12 +6,15 @@ export const cleaningSchemaJoi = Joi.object({
   date: Joi.string().required(),
   task: Joi.object().required(),
   roomNumber: Joi.number().required(),
+  adder: Joi.object().required(),
 });
 
 export const cleaningSchemaJoiPart = Joi.object({
   date: Joi.string(),
   task: Joi.object(),
   roomNumber: Joi.number(),
+  editor: Joi.object(),
+  checked: Joi.object(),
 });
 
 const cleaningSchema = new Schema(
@@ -27,6 +30,17 @@ const cleaningSchema = new Schema(
     task: {
       type: Object,
       require: true,
+    },
+    adder: {
+      type: Object,
+      require: true,
+    },
+    editor: {
+      type: Object,
+    },
+    checked: {
+      type: Object,
+      default: { isDone: false },
     },
   },
   {

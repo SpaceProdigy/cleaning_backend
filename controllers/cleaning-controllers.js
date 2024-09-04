@@ -11,7 +11,11 @@ import {
 import { controllerWrapper } from "../decorators/index.js";
 
 const getList = async (req, res) => {
-  const data = await allSchedules(req.query);
+  const { dinamicCleaningRoute, date } = req.params;
+  const data = await allSchedules({
+    date,
+    nameCollection: dinamicCleaningRoute,
+  });
   res.json(data);
 };
 
@@ -31,6 +35,7 @@ const add = async (req, res) => {
 
 const updateById = async (req, res) => {
   const { id, dinamicCleaningRoute } = req.params;
+
   const result = await updateScheduleById({
     itemId: id,
     item: req.body,

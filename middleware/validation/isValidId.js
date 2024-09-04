@@ -8,3 +8,15 @@ export const isValidId = (req, res, next) => {
   }
   next();
 };
+
+export const validateRoute = (correctRoutes) => {
+  return (req, res, next) => {
+    const { dinamicCleaningRoute } = req.params;
+    console.log(dinamicCleaningRoute);
+    if (correctRoutes.includes(dinamicCleaningRoute)) {
+      next();
+    } else {
+      res.status(404).send(`404 Not Found: ${correctRoutes} Invalid route`);
+    }
+  };
+};
