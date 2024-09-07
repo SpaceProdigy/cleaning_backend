@@ -55,10 +55,6 @@ cleaningSchema.post("findOneAndUpdate", handleSaveError);
 cleaningSchema.path("createdAt").select(false);
 cleaningSchema.path("updatedAt").select(false);
 
-const Schedule = model("blueCorridor", cleaningSchema);
-
 export const dinamicModel = (currentModel) => {
   return model(currentModel, cleaningSchema);
 };
-
-export default Schedule;

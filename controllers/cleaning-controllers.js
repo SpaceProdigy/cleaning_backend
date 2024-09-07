@@ -1,12 +1,9 @@
-import { HttpError } from "../helpers/index.js";
-
 import {
   addSchedule,
   deleteScheduleById,
   allSchedules,
-  scheduleById,
   updateScheduleById,
-} from "../cleaning/functions.js";
+} from "../functions/cleaning/functions.js";
 
 import { controllerWrapper } from "../decorators/index.js";
 
@@ -17,12 +14,6 @@ const getList = async (req, res) => {
     nameCollection: dinamicCleaningRoute,
   });
   res.json(data);
-};
-
-const getById = async (req, res) => {
-  const { id } = req.params;
-  const result = await scheduleById(id);
-  res.json(result);
 };
 
 const add = async (req, res) => {
@@ -55,7 +46,6 @@ const deleteById = async (req, res) => {
 
 export default {
   getList: controllerWrapper(getList),
-  getById: controllerWrapper(getById),
   add: controllerWrapper(add),
   updateById: controllerWrapper(updateById),
   deleteById: controllerWrapper(deleteById),

@@ -12,7 +12,6 @@ export const isValidId = (req, res, next) => {
 export const validateRoute = (correctRoutes) => {
   return (req, res, next) => {
     const { dinamicCleaningRoute } = req.params;
-    console.log(dinamicCleaningRoute);
     if (correctRoutes.includes(dinamicCleaningRoute)) {
       next();
     } else {

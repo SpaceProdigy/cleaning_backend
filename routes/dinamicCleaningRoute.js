@@ -25,13 +25,6 @@ dinamicCleaningRoute.get(
   cleaningControllers.getList
 );
 
-dinamicCleaningRoute.get(
-  "/:dinamicCleaningRoute/:id",
-  validateRoute(correctRoutes),
-  isValidId,
-  cleaningControllers.getById
-);
-
 dinamicCleaningRoute.post(
   "/:dinamicCleaningRoute",
   validateRoute(correctRoutes),

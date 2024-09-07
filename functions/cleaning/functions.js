@@ -1,5 +1,5 @@
-import Schedule, { dinamicModel } from "../models/cleaningSchedules.js";
-import HttpError from "../helpers/HttpError.js";
+import { dinamicModel } from "../../models/cleaningSchedules.js";
+import HttpError from "../../helpers/HttpError.js";
 import dayjs from "dayjs";
 
 export const allSchedules = async ({ date, nameCollection }) => {
@@ -13,14 +13,6 @@ export const allSchedules = async ({ date, nameCollection }) => {
     },
   });
   return data;
-};
-
-export const scheduleById = async (itemId) => {
-  const result = await Schedule.findById(itemId);
-  if (!result) {
-    throw HttpError(404, `Not found ${itemId}`);
-  }
-  return result;
 };
 
 export const addSchedule = async ({ newItem, nameCollection }) => {

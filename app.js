@@ -4,6 +4,8 @@ import express from "express";
 import logger from "morgan";
 import dinamicCleaningRoute from "./routes/dinamicCleaningRoute.js";
 
+import users from "./routes/users.js";
+
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -15,6 +17,7 @@ app.use(cors());
 // console.log(process.env);
 
 app.use("/cleaning", dinamicCleaningRoute);
+app.use("/users", users);
 
 app.use(function (req, res) {
   res.status(404).json({ message: "Not found" });
