@@ -9,9 +9,10 @@ export const allSchedules = async ({ date, nameCollection }) => {
   const data = await dinamicModel(nameCollection).find({
     date: {
       $gte: startOfMonth,
-      $lt: endOfMonth,
+      $lte: endOfMonth,
     },
   });
+
   return data;
 };
 

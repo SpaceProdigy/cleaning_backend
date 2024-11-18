@@ -14,24 +14,16 @@ users.patch(
   usersControllers.addAdmin
 );
 
-users.patch(
-  "/admins/:id/delete",
-  validation.patchUsersValidate,
-  usersControllers.addAdmin
-);
+
 
 users.get("/:id", usersControllers.getUser);
 
 users.patch(
   "/:id",
-
   validation.patchUsersValidate,
   usersControllers.updateUser
 );
 
-// admins.delete(
-//   "/:admins/:id",
 
-// );
 
 export default users;
