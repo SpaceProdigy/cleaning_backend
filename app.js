@@ -5,6 +5,7 @@ import logger from "morgan";
 import dinamicCleaningRoute from "./routes/dinamicCleaningRoute.js";
 
 import users from "./routes/users.js";
+import "./telegram/telegram-bot.js";
 
 const app = express();
 
