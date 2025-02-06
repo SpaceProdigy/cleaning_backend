@@ -102,8 +102,6 @@ If the cleaning is done, please write to the group and send a photo! Thank you f
 };
 
 // Планируем выполнение функции каждый день в 8:00
-// schedule.scheduleJob("41 23 * * *", () => {
-//   schedulesReminder();
-// });
-
-schedulesReminder();
+schedule.scheduleJob("0 8 * * *", () => {
+  schedulesReminder();
+});
