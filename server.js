@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
 mongoose
   .connect(DB_HOST)
   .then(() => {
-    httpServer.listen(PORT, () => {
+    httpServer.listen(PORT || 3000, () => {
       console.log(`Server running on port ${PORT}`);
     });
   })

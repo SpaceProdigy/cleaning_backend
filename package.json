@@ -2,7 +2,7 @@
   "name": "superserver",
   "version": "1.0.0",
   "description": "This is awesome server",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
