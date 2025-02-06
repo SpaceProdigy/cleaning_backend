@@ -7,7 +7,15 @@ const { TELEGRAM_BOT_KEY } = process.env;
 const token = TELEGRAM_BOT_KEY;
 const chatId = -1002236250541;
 
+console.log("Бот запускается...");
+
 const bot = new TelegramBot(token, { polling: true });
+
+bot.on("polling_error", (error) => {
+  console.error("Ошибка polling:", error);
+});
+
+console.log("Бот успешно запущен!");
 
 // bot.on("message", (msg) => {
 //   const chatId = msg.forward_from_chat?.id || msg.chat.id;
