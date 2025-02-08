@@ -3,9 +3,8 @@ import cors from "cors";
 import express from "express";
 import logger from "morgan";
 import dinamicCleaningRoute from "./routes/dinamicCleaningRoute.js";
-
+import reminders from "./routes/reminders.js";
 import users from "./routes/users.js";
-import "./telegram/telegram-bot.js";
 
 const app = express();
 
@@ -19,6 +18,7 @@ app.use(cors());
 
 app.use("/cleaning", dinamicCleaningRoute);
 app.use("/users", users);
+app.use("/telegram", reminders);
 
 app.use(function (req, res) {
   res.status(404).json({ message: "Not found" });
