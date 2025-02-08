@@ -53,7 +53,7 @@ const options = {
 };
 
 // Функция для отправки напоминания
-export const schedulesReminder = async () => {
+export const schedulesReminder = async (req, res) => {
   try {
     // Собираем все задачи из всех коллекций
     const tasksByCorridor = {};
@@ -86,7 +86,10 @@ export const schedulesReminder = async () => {
         );
       }
     }
+    // Возвращаем успешный статус
+    res.status(200).send("Напоминания успешно отправлены.");
   } catch (error) {
     console.error("Ошибка при отправке напоминания:", error);
+    res.status(500).send("Произошла ошибка при отправке напоминания.");
   }
 };
