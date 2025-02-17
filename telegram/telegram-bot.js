@@ -93,12 +93,12 @@ bot.on("callback_query", async (query) => {
         reply_markup: {
           inline_keyboard: [
             [{ text: "🔵 Синий", callback_data: "blueCorridor" }],
-            [{ text: "🔴 Красный", callback_data: "redCorridor" }],
-            [{ text: "🟡 Желтый", callback_data: "yellowCorridor" }],
-            [{ text: "🍽️ Кухня 3", callback_data: "kitchen3" }],
+            // [{ text: "🔴 Красный", callback_data: "redCorridor" }],
+            // [{ text: "🟡 Желтый", callback_data: "yellowCorridor" }],
+            // [{ text: "🍽️ Кухня 3", callback_data: "kitchen3" }],
             [{ text: "🍽️ Кухня 4", callback_data: "kitchen4" }],
-            [{ text: "🍽️ Кухня 5", callback_data: "kitchen5" }],
-            [{ text: "🍽️ Кухня 6", callback_data: "kitchen6" }],
+            // [{ text: "🍽️ Кухня 5", callback_data: "kitchen5" }],
+            // [{ text: "🍽️ Кухня 6", callback_data: "kitchen6" }],
           ],
         },
       });
