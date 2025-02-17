@@ -25,6 +25,12 @@ dinamicCleaningRoute.get(
   cleaningControllers.getList
 );
 
+dinamicCleaningRoute.get(
+  "/:dinamicCleaningRoute/room/:roomNumber/:isTidied",
+  validateRoute(correctRoutes),
+  cleaningControllers.getListByRoom
+);
+
 dinamicCleaningRoute.post(
   "/:dinamicCleaningRoute",
   validateRoute(correctRoutes),

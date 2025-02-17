@@ -5,24 +5,24 @@ import { createServer } from "http";
 
 const { DB_HOST, PORT } = process.env;
 
-const httpServer = createServer(app);
+// const httpServer = createServer(app);
 
-const io = new Server(httpServer, {
-  cors: {
-    origin: "*",
-  },
-});
+// const io = new Server(httpServer, {
+//   cors: {
+//     origin: "*",
+//   },
+// });
 
-io.on("connection", (socket) => {
-  socket.on("chat-message", (sms) => {
-    socket.broadcast.emit("chat-message", sms);
-  });
-});
+// io.on("connection", (socket) => {
+//   socket.on("chat-message", (sms) => {
+//     socket.broadcast.emit("chat-message", sms);
+//   });
+// });
 
 mongoose
   .connect(DB_HOST)
   .then(() => {
-    httpServer.listen(PORT || 3000, () => {
+    app.listen(PORT || 3000, () => {
       console.log(`Server running on port ${PORT}`);
     });
   })

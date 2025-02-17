@@ -3,15 +3,34 @@ import {
   deleteScheduleById,
   allSchedules,
   updateScheduleById,
+  allSchedulesByRoom,
 } from "../functions/cleaning/functions.js";
 
 import { controllerWrapper } from "../decorators/index.js";
 
 const getList = async (req, res) => {
   const { dinamicCleaningRoute, date } = req.params;
+  const { page = 1, limit = 100 } = req.query;
+
   const data = await allSchedules({
     date,
     nameCollection: dinamicCleaningRoute,
+    limit,
+    page,
+  });
+  res.json(data);
+};
+
+const getListByRoom = async (req, res) => {
+  const { dinamicCleaningRoute, roomNumber, isTidied } = req.params;
+  const { page = 1, limit = 5 } = req.query;
+
+  const data = await allSchedulesByRoom({
+    roomNumber,
+    nameCollection: dinamicCleaningRoute,
+    isTidied,
+    limit,
+    page,
   });
   res.json(data);
 };
@@ -49,4 +68,5 @@ export default {
   add: controllerWrapper(add),
   updateById: controllerWrapper(updateById),
   deleteById: controllerWrapper(deleteById),
+  getListByRoom: controllerWrapper(getListByRoom),
 };
