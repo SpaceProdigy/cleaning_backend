@@ -44,7 +44,7 @@ export const allSchedulesByRoom = async ({
   const filter = {
     roomNumber,
     "checked.isDone": JSON.parse(isTidied),
-    date: { $lt: today },
+    date: { $lte: today },
   };
 
   const data = await dinamicModel(nameCollection)

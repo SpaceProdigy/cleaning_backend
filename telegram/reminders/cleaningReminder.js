@@ -23,7 +23,7 @@ export const cleaningReminder = async (req, res) => {
 
     const tasks = await dinamicModel(group)
       .find({
-        date: dayjs().format("YYYY-MM-DD"),
+        date: today,
       })
       .sort({ task: 1, roomNumber: 1 });
 
@@ -42,13 +42,15 @@ export const cleaningReminder = async (req, res) => {
     try {
       await bot.sendMessage(chatId, messageBlueCorridor(tasks), options);
       console.log(`Сообщение отправлено в группу ${group}`);
-      await SentMessages.create({
-        group,
-        date: today,
-        alreadySent: true,
-        chatId,
-      });
-      console.log(`Сообщение помечено как отправленое`);
+      // Ищем запись по группе и обновляем ее
+      const updatedMessage = await SentMessages.findOneAndUpdate(
+        { group }, // Ищем существующую запись по группе
+        { date: today, alreadySent: true, chatId }, // Обновляем данные
+        { upsert: true, new: true } // Если нет записи - создаем, если есть - обновляем
+      );
+
+      console.log(`Запись обновлена/создана:`, updatedMessage);
+
       return res.json({ group, date: today, alreadySent: false, chatId });
     } catch (error) {
       console.error(`Ошибка при отправке сообщения в группу ${group}:`, error);

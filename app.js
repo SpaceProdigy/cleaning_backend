@@ -5,7 +5,7 @@ import logger from "morgan";
 import dinamicCleaningRoute from "./routes/dinamicCleaningRoute.js";
 import reminders from "./routes/reminders.js";
 import users from "./routes/users.js";
-
+import "./telegram/reminders/autoCleaningReminder.js";
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";

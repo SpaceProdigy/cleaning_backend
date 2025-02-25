@@ -82,10 +82,17 @@ bot.on("callback_query", async (query) => {
   processingRequests.add(chatId);
 
   try {
-    bot.sendMessage(
-      chatId,
-      botMessages({ lang, notifyType: "processingRequest" })
-    );
+    if (corridors.includes(corridor)) {
+      bot.sendMessage(
+        chatId,
+        botMessages({
+          lang,
+          notifyType: "processingRequestCorridorTask",
+          text: corridorNames[corridor],
+        }),
+        { parse_mode: "HTML" }
+      );
+    }
 
     if (corridor === "get_list") {
       processingRequests.delete(chatId);
@@ -102,18 +109,6 @@ bot.on("callback_query", async (query) => {
           ],
         },
       });
-    }
-
-    if (corridors.includes(corridor)) {
-      bot.sendMessage(
-        chatId,
-        botMessages({
-          lang,
-          notifyType: "processingRequestCorridorTask",
-          text: corridorNames[corridor],
-        }),
-        { parse_mode: "HTML" }
-      );
     }
 
     const startOfMonth = dayjs().startOf("week").format("YYYY-MM-DD");
