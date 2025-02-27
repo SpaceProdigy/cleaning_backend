@@ -63,6 +63,6 @@ export const schedulesReminder = async () => {
   }
 };
 
-schedule.scheduleJob("* 8 * * *", function () {
+schedule.scheduleJob("0 8 * * *", function () {
   schedulesReminder();
 });
