@@ -5,10 +5,11 @@ import logger from "morgan";
 import dinamicCleaningRoute from "./routes/dinamicCleaningRoute.js";
 import reminders from "./routes/reminders.js";
 import users from "./routes/users.js";
-import "./telegram/telegram-bot.js";
+// import "./telegram/telegram-bot.js";
 import dinamicLessonsRoute from "./routes/dinamicLessonsRoute.js";
 import postsRoute from "./routes/postsRoute.js";
 import uploadRoute from "./routes/uploadRoute.js";
+import telegramBotRoute from "./telegram/telegram-bot.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/users", users);
 app.use("/telegram", reminders);
 app.use("/posts", postsRoute);
 app.use("/upload", uploadRoute);
+app.use("/bot", telegramBotRoute);
 
 app.use(function (req, res) {
   res.status(404).json({ message: "Not found" });

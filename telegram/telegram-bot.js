@@ -4,13 +4,33 @@ import { botMessages, corridorNames, corridors } from "./locales.js";
 import dayjs from "dayjs";
 import { dinamicModel } from "../models/cleaningSchedules.js";
 import { getChannelID, getID } from "./botCommands/getID.js";
+import { Router } from "express";
 
 dotenv.config();
 
+const telegramBotRoute = Router();
+
 const { TELEGRAM_BOT_KEY_FLEX_SP_BOT } = process.env;
+const url = "https://cleaning-backend.onrender.com";
+
 export const bot = new TelegramBot(TELEGRAM_BOT_KEY_FLEX_SP_BOT);
+bot.setWebHook(`${url}/bot${TELEGRAM_BOT_KEY_FLEX_SP_BOT}`);
 
 console.log("🤖 Бот успешно запущен!");
+
+// Обработка обновлений от Telegram
+telegramBotRoute.post(`/bot${TELEGRAM_BOT_KEY_FLEX_SP_BOT}`, (req, res) => {
+  console.log("✅ Получены обновления от Telegram");
+  bot.processUpdate(req.body);
+  res.sendStatus(200);
+});
+
+// Пинг для проверки бота
+bot.on("message", (msg) => {
+  bot.sendMessage(msg.chat.id, "I am alive!");
+});
+
+export default telegramBotRoute;
 
 // 📌 Обработка всех сообщений
 bot.on("message", getID);
