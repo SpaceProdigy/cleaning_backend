@@ -19,3 +19,14 @@ export const validateRoute = (correctRoutes) => {
     }
   };
 };
+
+export const validateLessonsRoute = (correctRoutes) => {
+  return (req, res, next) => {
+    const { dinamicLessonsRoute } = req.params;
+    if (correctRoutes.includes(dinamicLessonsRoute)) {
+      next();
+    } else {
+      res.status(404).send(`404 Not Found: ${correctRoutes} Invalid route`);
+    }
+  };
+};

@@ -3,13 +3,21 @@ import dotenv from "dotenv";
 import { botMessages, corridorNames, corridors } from "./locales.js";
 import dayjs from "dayjs";
 import { dinamicModel } from "../models/cleaningSchedules.js";
+import { getChannelID, getID } from "./botCommands/getID.js";
 
 dotenv.config();
 
-const { TELEGRAM_BOT_KEY } = process.env;
-export const bot = new TelegramBot(TELEGRAM_BOT_KEY, { polling: true });
+const { TELEGRAM_BOT_KEY_FLEX_SP_BOT } = process.env;
+export const bot = new TelegramBot(TELEGRAM_BOT_KEY_FLEX_SP_BOT, {
+  polling: true,
+});
 
 console.log("🤖 Бот успешно запущен!");
+
+// 📌 Обработка всех сообщений
+bot.on("message", getID);
+
+bot.on("channel_post", getChannelID);
 
 // 🟢 Блокируем спам нажатий (чтобы не кликали 100 раз подряд)
 const processingRequests = new Set();
@@ -51,7 +59,7 @@ bot.onText(/\/start/, async (msg) => {
             [
               {
                 text: botMessages({ lang, notifyType: "openTheApp" }),
-                url: "https://t.me/duty_sp_bot/duty",
+                url: "https://t.me/flex_sp_bot/fox",
               },
             ],
           ],
