@@ -20,19 +20,15 @@ mongoose
       console.log(`🚀 Server running on port ${PORT}`);
 
       try {
-        const webhookInfo = await bot.getWebhookInfo();
-        if (webhookInfo.url !== WEBHOOK_URL) {
-          const result = await bot.setWebHook(WEBHOOK_URL);
-          if (result) {
-            console.log(`✅ Webhook установлен на ${WEBHOOK_URL}`);
-          } else {
-            console.error("❌ Ошибка установки Webhook");
-          }
+        // Прямо устанавливаем Webhook, без предварительной проверки
+        const result = await bot.setWebHook(WEBHOOK_URL);
+        if (result) {
+          console.log(`✅ Webhook установлен на ${WEBHOOK_URL}`);
         } else {
-          console.log(`✅ Webhook уже установлен на ${WEBHOOK_URL}`);
+          console.error("❌ Ошибка установки Webhook");
         }
       } catch (error) {
-        console.error("❌ Ошибка при проверке Webhook:", error);
+        console.error("❌ Ошибка при установке Webhook:", error);
       }
     });
   })
