@@ -8,9 +8,7 @@ import { getChannelID, getID } from "./botCommands/getID.js";
 dotenv.config();
 
 const { TELEGRAM_BOT_KEY_FLEX_SP_BOT } = process.env;
-export const bot = new TelegramBot(TELEGRAM_BOT_KEY_FLEX_SP_BOT, {
-  polling: true,
-});
+export const bot = new TelegramBot(TELEGRAM_BOT_KEY_FLEX_SP_BOT);
 
 console.log("🤖 Бот успешно запущен!");
 

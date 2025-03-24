@@ -115,9 +115,11 @@ export const schedulesLessonsReminder = async () => {
 };
 
 schedule.scheduleJob("0 8 * * *", function () {
+  console.log("⏳ Запуск автонапоминания уборки...");
   schedulesReminder();
 });
 
-schedule.scheduleJob("0 11 * * *", function () {
+schedule.scheduleJob("0 15 * * *", function () {
+  console.log("⏳ Запуск автонапоминания уроков...");
   schedulesLessonsReminder();
 });

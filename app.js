@@ -6,7 +6,6 @@ import dinamicCleaningRoute from "./routes/dinamicCleaningRoute.js";
 import reminders from "./routes/reminders.js";
 import users from "./routes/users.js";
 import "./telegram/telegram-bot.js";
-import "./telegram/reminders/autoReminder.js";
 import dinamicLessonsRoute from "./routes/dinamicLessonsRoute.js";
 import postsRoute from "./routes/postsRoute.js";
 import uploadRoute from "./routes/uploadRoute.js";
