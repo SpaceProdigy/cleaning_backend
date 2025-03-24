@@ -2,8 +2,8 @@ import cloudinary from "cloudinary";
 import axios from "axios";
 import FormData from "form-data";
 
-const { TELEGRAM_BOT_KEY, STOREGE_CHAT_ID } = process.env;
-const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_BOT_KEY}`;
+const { TELEGRAM_BOT_KEY_FLEX_SP_BOT, STOREGE_CHAT_ID } = process.env;
+const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_BOT_KEY_FLEX_SP_BOT}`;
 
 export const getErrorMessage = () => {
   return {

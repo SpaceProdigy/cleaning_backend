@@ -118,6 +118,6 @@ schedule.scheduleJob("0 8 * * *", function () {
   schedulesReminder();
 });
 
-schedule.scheduleJob("0 8 * * *", function () {
+schedule.scheduleJob("0 11 * * *", function () {
   schedulesLessonsReminder();
 });

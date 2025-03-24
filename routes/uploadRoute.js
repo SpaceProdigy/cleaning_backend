@@ -78,7 +78,7 @@ uploadRoute.post(
 
               const fileId = tgResponse.result.document?.file_id;
               const filePath = await getFilePathFromTelegram(fileId);
-              const fileUrl = `https://api.telegram.org/file/bot${process.env.TELEGRAM_BOT_KEY}/${filePath}`;
+              const fileUrl = `https://api.telegram.org/file/bot${process.env.TELEGRAM_BOT_KEY_FLEX_SP_BOT}/${filePath}`;
 
               fileData.push({
                 url: fileUrl,
