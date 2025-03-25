@@ -25,7 +25,7 @@ export const handleStartCommand = async (msg) => {
   }
 
   processingRequests.add(chatId);
-  bot.sendMessage(
+  await bot.sendMessage(
     chatId,
     botMessages({ lang, notifyType: "processingRequest" })
   );
@@ -143,7 +143,7 @@ export const handleTextCleaningMessage = async (msg) => {
 
       const corridor = selectedCorridorKey;
 
-      bot.sendMessage(
+      await bot.sendMessage(
         chatId,
         botMessages({
           lang,
@@ -259,7 +259,7 @@ export const handleTextLessonsMessage = async (msg) => {
 
       const lessons = selectedLessonKey;
 
-      bot.sendMessage(
+      await bot.sendMessage(
         chatId,
         botMessages({
           lang,
