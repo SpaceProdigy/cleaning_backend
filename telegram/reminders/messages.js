@@ -26,7 +26,7 @@ If the cleaning is done, please write to the group and send a photo! Thank you f
  📌 Это сообщение отправлено автоматически. / This message was sent automatically.
 `;
 
-export const messageEnglishReminder = (tasks) => `<b>📣 English Reminder</b> 
+export const messageEnglishReminder = (tasks) => `<b>📣 English Reminder</b>
 
 Today is <b>${dayjs().format(
   "DD.MM.YYYY"
@@ -34,22 +34,24 @@ Today is <b>${dayjs().format(
 ${tasks
   .map(
     ({ startTime, endTime, place, topic, notes }) => `
-      ${place ? `<b>📍 Location: ${place}</b>` : ""}
+    ${place ? `<b>📍 Location:</b> ${place}` : ""}
 
-      ${
-        startTime && endTime
-          ? `<b>⏰ Time: ${dayjs(startTime).format("HH:mm")}-${dayjs(
-              endTime
-            ).format("HH:mm")}</b>`
-          : ""
-      }
+    ${
+      startTime && endTime
+        ? `<b>⏰ Time:</b> ${dayjs(startTime).format("HH:mm")} - ${dayjs(
+            endTime
+          ).format("HH:mm")}`
+        : ""
+    }
+ ${
+   topic || notes
+     ? `
+    ${topic ? `<b>📝 Topic:</b> ${topic}` : ""}
 
-      ${topic ? `<b>📝 Topic: ${topic}</b>` : ""}
-      
-      ${notes ? `<b>🗒️ Notes: ${notes}</b>` : ""}
-    `
+    ${notes ? `<b>🗒️ Notes:</b> ${notes}` : ""}
+      `
+     : ""
+ } `
   )
   .join("\n\n")}
-
- 📌 This message was sent automatically.
-`;
+📌 This message was sent automatically.`;
