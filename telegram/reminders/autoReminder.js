@@ -7,7 +7,7 @@ schedule.scheduleJob("0 8 * * *", function () {
   schedulesReminder();
 });
 
-schedule.scheduleJob("56 1 * * *", function () {
+schedule.scheduleJob("0 8 * * *", function () {
   console.log("⏳ Запуск автонапоминания уроков...");
   schedulesLessonsReminder();
 });
