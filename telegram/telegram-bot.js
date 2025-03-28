@@ -12,6 +12,7 @@ dotenv.config();
 
 export const TELEGRAM_BOT_KEY = process.env.TELEGRAM_BOT_KEY_FLEX_SP_BOT;
 const url = "https://cleaning-backend.onrender.com";
+
 export const bot = new TelegramBot(TELEGRAM_BOT_KEY);
 
 bot

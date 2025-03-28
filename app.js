@@ -31,6 +31,7 @@ app.use("/upload", uploadRoute);
 app.use("/books", booksRoute);
 
 app.post(`/bot${TELEGRAM_BOT_KEY}`, (req, res) => {
+  console.log("Получен запрос от Telegram:", req.body);
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
