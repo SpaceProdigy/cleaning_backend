@@ -1,8 +1,5 @@
-// messageHandler.js
-import { bot } from "../telegram-bot.js"; // Импортируем уже настроенный бот
-
 // Функция для обработки команды /id
-export const getID = async (msg) => {
+export const getID = async (msg, bot) => {
   try {
     // Если сообщение содержит команду /id
     if (msg.text && msg.text.toLowerCase() === "/id") {
@@ -28,7 +25,7 @@ export const getID = async (msg) => {
 };
 
 // Функция для обработки сообщений в канале
-export const getChannelID = async (msg) => {
+export const getChannelID = async (msg, bot) => {
   try {
     if (msg.text && msg.text.toLowerCase() === "/id") {
       const chatId = msg.chat.id;

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import express from "express";
 import app from "./app.js";
 
 const { DB_HOST, PORT } = process.env;
@@ -16,3 +15,11 @@ mongoose
     console.error("❌ Ошибка подключения к MongoDB:", error.message);
     process.exit(1);
   });
+
+process.on("uncaughtException", (error) => {
+  console.error("❌ Непредвиденная ошибка:", error);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("⚠️ Обработан необработанный Promise:", reason);
+});

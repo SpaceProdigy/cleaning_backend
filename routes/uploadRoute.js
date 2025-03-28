@@ -9,6 +9,7 @@ import {
   uploadImageToCloudinary,
 } from "../functions/posts/functions.js";
 import { configureCloudinary } from "../cloudinaryConfig.js";
+import { TELEGRAM_BOT_KEY } from "../telegram/telegram-bot.js";
 
 // Инициализация Cloudinary
 configureCloudinary();
@@ -78,7 +79,7 @@ uploadRoute.post(
 
               const fileId = tgResponse.result.document?.file_id;
               const filePath = await getFilePathFromTelegram(fileId);
-              const fileUrl = `https://api.telegram.org/file/bot${process.env.TELEGRAM_BOT_KEY_FLEX_SP_BOT}/${filePath}`;
+              const fileUrl = `https://api.telegram.org/file/bot${TELEGRAM_BOT_KEY}/${filePath}`;
 
               fileData.push({
                 url: fileUrl,

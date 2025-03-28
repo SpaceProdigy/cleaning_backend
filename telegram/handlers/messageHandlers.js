@@ -8,11 +8,10 @@ import {
 } from "../locales.js";
 import dayjs from "dayjs";
 import { processingRequests } from "../utils/processingRequests.js";
-import { bot } from "../telegram-bot.js";
 import { dinamicLessonsModel } from "../../models/lessonsModel.js";
 
 // Обработка команды /start
-export const handleStartCommand = async (msg) => {
+export const handleStartCommand = async (msg, bot) => {
   const lang = msg.from.language_code;
   const firstName = msg.chat.first_name;
   const chatId = msg.chat.id;
@@ -71,8 +70,7 @@ export const handleStartCommand = async (msg) => {
   }
 };
 
-// Обработка нажатий на обычные кнопки (не инлайн)
-export const handleTextCleaningMessage = async (msg) => {
+export const handleTextCleaningMessage = async (msg, bot) => {
   const chatId = msg.chat.id;
   const text = msg.text; // Текст кнопки, на которую нажал пользователь
   let lang = msg.from.language_code;
@@ -193,7 +191,7 @@ export const handleTextCleaningMessage = async (msg) => {
   }
 };
 
-export const handleTextLessonsMessage = async (msg) => {
+export const handleTextLessonsMessage = async (msg, bot) => {
   const chatId = msg.chat.id;
   const text = msg.text;
   let lang = msg.from.language_code;
