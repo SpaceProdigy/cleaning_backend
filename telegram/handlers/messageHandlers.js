@@ -22,14 +22,25 @@ export const handleStartCommand = async (msg, bot) => {
       botMessages({ lang, notifyType: "alreadyProcessed" })
     );
   }
-  await delay(standartDelay);
+
   processingRequests.add(chatId);
+
+  await delay(standartDelay);
+
   await bot.sendMessage(
     chatId,
     botMessages({ lang, notifyType: "processingRequest" })
   );
-  await delay(standartDelay);
+
   try {
+    await delay(standartDelay);
+
+    await bot.sendAnimation(
+      chatId,
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnQ2ZWhodGdqZ3Y1M3U4NncwdHZ0dmpldG9hNzV2YWRudGhveWxzeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ornk57KwDXf81rjWM/giphy.gif"
+    );
+    await delay(standartDelay);
+
     await bot.sendMessage(
       chatId,
       botMessages({ lang, notifyType: "greetings", text: firstName }),
@@ -95,6 +106,13 @@ export const handleTextCleaningMessage = async (msg, bot) => {
 
   try {
     if (text === botMessages({ lang, notifyType: "cleaningList" })) {
+      await bot.sendAnimation(
+        chatId,
+        "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJuN3MxdWlsd212b2FodGRtbmF5MmR6ZG00ZzI2dWV2czNmd202bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NV4cSrRYXXwfUcYnua/giphy.gif"
+      );
+
+      await delay(standartDelay);
+
       const corridorOptions = getCorridorOptions(lang);
 
       return bot.sendMessage(
@@ -226,6 +244,13 @@ export const handleTextLessonsMessage = async (msg, bot) => {
   try {
     if (text === botMessages({ lang, notifyType: "lesonsList" })) {
       const lessonsOptions = getLessonsOptions(lang);
+
+      await bot.sendAnimation(
+        chatId,
+        "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHgycnY4ZGVidXJ2cXdvdzJra3dmZG0wZm51cG9hYjVqbm43NjN1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NFA61GS9qKZ68/giphy.gif"
+      );
+
+      await delay(standartDelay);
 
       return bot.sendMessage(
         chatId,
