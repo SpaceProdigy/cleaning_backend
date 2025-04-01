@@ -173,7 +173,10 @@ export const handleTextCleaningMessage = async (msg, bot) => {
         .sort({ date: 1, task: 1, roomNumber: 1 });
 
       if (!tasks.length) {
-        bot.sendMessage(chatId, botMessages({ lang, notifyType: "noTask" }));
+        bot.sendMessage(
+          chatId,
+          botMessages({ lang, notifyType: "taskNotFound" })
+        );
         return;
       }
 
@@ -295,7 +298,10 @@ export const handleTextLessonsMessage = async (msg, bot) => {
         .sort({ date: 1 });
 
       if (!lessonsArr.length) {
-        bot.sendMessage(chatId, botMessages({ lang, notifyType: "noLessons" }));
+        bot.sendMessage(
+          chatId,
+          botMessages({ lang, notifyType: "LessonsNotFound" })
+        );
         return;
       }
 
