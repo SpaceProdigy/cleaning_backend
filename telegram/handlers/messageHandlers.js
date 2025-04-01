@@ -7,9 +7,9 @@ import {
   lessonsNames,
 } from "../locales.js";
 import dayjs from "dayjs";
-import { processingRequests } from "../utils/processingRequests.js";
+import { delay, processingRequests } from "../utils/processingRequests.js";
 import { dinamicLessonsModel } from "../../models/lessonsModel.js";
-
+const standartDelay = 500;
 // Обработка команды /start
 export const handleStartCommand = async (msg, bot) => {
   const lang = msg.from.language_code;
@@ -17,18 +17,18 @@ export const handleStartCommand = async (msg, bot) => {
   const chatId = msg.chat.id;
 
   if (processingRequests.has(chatId)) {
-    return bot.sendMessage(
+    return await bot.sendMessage(
       chatId,
       botMessages({ lang, notifyType: "alreadyProcessed" })
     );
   }
-
+  await delay(standartDelay);
   processingRequests.add(chatId);
   await bot.sendMessage(
     chatId,
     botMessages({ lang, notifyType: "processingRequest" })
   );
-
+  await delay(standartDelay);
   try {
     await bot.sendMessage(
       chatId,
@@ -47,6 +47,7 @@ export const handleStartCommand = async (msg, bot) => {
         },
       }
     );
+    await delay(standartDelay);
     bot.sendMessage(
       chatId,
       botMessages({ lang, notifyType: "selectAction", text: firstName }),
@@ -90,6 +91,8 @@ export const handleTextCleaningMessage = async (msg, bot) => {
 
   processingRequests.add(chatId);
 
+  await delay(standartDelay);
+
   try {
     if (text === botMessages({ lang, notifyType: "cleaningList" })) {
       const corridorOptions = getCorridorOptions(lang);
@@ -116,7 +119,7 @@ export const handleTextCleaningMessage = async (msg, bot) => {
 
     if (text === botMessages({ lang, notifyType: "backToMainMenu" })) {
       processingRequests.delete(chatId);
-      return handleStartCommand(msg); // Возвращаем к основному меню
+      return handleStartCommand(msg, bot);
     }
 
     const cleaningText = Object.values(corridorNames).map(
@@ -127,6 +130,8 @@ export const handleTextCleaningMessage = async (msg, bot) => {
       const selectedCorridorKey = Object.keys(corridorNames).find(
         (key) => corridorNames[key][lang] === text
       );
+
+      await delay(standartDelay);
 
       if (!selectedCorridorKey) {
         return bot.sendMessage(
@@ -150,6 +155,8 @@ export const handleTextCleaningMessage = async (msg, bot) => {
         }),
         { parse_mode: "HTML" }
       );
+
+      await delay(standartDelay);
 
       const startOfMonth = dayjs().startOf("week").format("YYYY-MM-DD");
       const endOfMonth = dayjs().endOf("week").format("YYYY-MM-DD");
@@ -211,6 +218,8 @@ export const handleTextLessonsMessage = async (msg, bot) => {
 
   processingRequests.add(chatId);
 
+  await delay(standartDelay);
+
   try {
     if (text === botMessages({ lang, notifyType: "lesonsList" })) {
       const lessonsOptions = getLessonsOptions(lang);
@@ -244,6 +253,8 @@ export const handleTextLessonsMessage = async (msg, bot) => {
         (key) => lessonsNames[key][lang] === text
       );
 
+      await delay(standartDelay);
+
       if (!selectedLessonKey) {
         return bot.sendMessage(
           chatId,
@@ -266,6 +277,8 @@ export const handleTextLessonsMessage = async (msg, bot) => {
         }),
         { parse_mode: "HTML" }
       );
+
+      await delay(standartDelay);
 
       const startOfMonth = dayjs().startOf("month").format("YYYY-MM-DD");
       const endOfMonth = dayjs().endOf("month").format("YYYY-MM-DD");

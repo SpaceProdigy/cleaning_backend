@@ -28,6 +28,7 @@ export const botMessages = ({ lang, notifyType, text }) => {
     ua: {
       greetings: `👋 Привіт, *${text}*!
 Вас вітає Telegram-бот.
+Я можу показати вам розклад, або ви можете переглянути його у веб-додатку.
 `,
 
       cleaningList: "🧹 Переглянутий список прибирань",
@@ -38,7 +39,7 @@ export const botMessages = ({ lang, notifyType, text }) => {
       noTask: "Немає завдання",
       noLessons: "Немає уроків",
       errorText: "❌ Сталася помилка, повторіть спробу пізніше.",
-      openTheApp: "🚀 Відкрийти програму",
+      openTheApp: "🚀 Відкрити додаток",
       CorridorNotFound: "Коридор не знайдено",
       LessonsNotFound: "Уроки не знайдено",
       backToMainMenu: "Назад",
@@ -49,6 +50,7 @@ export const botMessages = ({ lang, notifyType, text }) => {
     en: {
       greetings: `👋 Hello, *${text}*!
 You are welcomed by the Telegram bot.
+I can show you the schedule, or you can view it in the web application.
 `,
       cleaningList: "🧹 Revised cleaning list",
       lesonsList: "🔔 Revised list of lessons",
