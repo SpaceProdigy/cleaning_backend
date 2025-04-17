@@ -9,7 +9,7 @@ import {
 
 const dinamicLessonsRoute = express.Router();
 
-const correctRoutes = ["lessonWithJill"];
+const correctRoutes = ["lessonWithJill", "lessonWithBert"];
 
 dinamicLessonsRoute.get(
   "/:dinamicLessonsRoute/:date",

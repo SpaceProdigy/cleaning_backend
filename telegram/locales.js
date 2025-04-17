@@ -138,6 +138,10 @@ export const lessonsNames = {
     en: "🏫 English lesson with Jill",
     ua: "🏫 Урок англійської з Джилл",
   },
+  lessonWithBert: {
+    en: "Guitar Lessons with Bert",
+    ua: "Уроки гітари з Бертом",
+  },
 };
 
 export const getLessonsOptions = (lang) => {
@@ -148,7 +152,10 @@ export const getLessonsOptions = (lang) => {
   }
 
   // Проверка на наличие всех нужных значений
-  const options = [{ text: lessonsNames.lessonWithJill[lang] || "Unknown" }];
+  const options = [
+    { text: lessonsNames.lessonWithJill[lang] || "Unknown" },
+    { text: lessonsNames.lessonWithBert[lang] || "Unknown" },
+  ];
 
   return options;
 };
