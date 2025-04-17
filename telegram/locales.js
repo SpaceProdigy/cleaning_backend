@@ -139,8 +139,8 @@ export const lessonsNames = {
     ua: "🏫 Урок англійської з Джилл",
   },
   lessonWithBert: {
-    en: "Guitar Lessons with Bert",
-    ua: "Уроки гітари з Бертом",
+    en: "🎸Guitar Lessons with Bert",
+    ua: "🎸Уроки гітари з Бертом",
   },
 };
 
