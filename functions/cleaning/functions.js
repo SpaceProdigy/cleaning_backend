@@ -3,32 +3,67 @@ import HttpError from "../../helpers/HttpError.js";
 import dayjs from "dayjs";
 
 export const allSchedules = async ({ date, nameCollection, limit, page }) => {
-  const startOfMonth = dayjs(date).startOf("month").format("YYYY-MM-DD");
-  const endOfMonth = dayjs(date).endOf("month").format("YYYY-MM-DD");
+  if (date !== "false" && date !== "uncleaned") {
+    const startOfMonth = dayjs(date).startOf("month").format("YYYY-MM-DD");
+    const endOfMonth = dayjs(date).endOf("month").format("YYYY-MM-DD");
 
-  // Фильтр по диапазону дат
-  const filter = {
-    date: {
-      $gte: startOfMonth,
-      $lte: endOfMonth,
-    },
-  };
+    // Фильтр по диапазону дат
+    const filter = {
+      date: {
+        $gte: startOfMonth,
+        $lte: endOfMonth,
+      },
+    };
 
-  const data = await dinamicModel(nameCollection)
-    .find(filter)
-    .sort({ date: 1 }) // Сортировка: от самой ранней даты к более поздним
-    .skip((page - 1) * limit) // Пропускаем элементы, которые не попадали на текущую страницу
-    .limit(Number(limit)); // Ограничиваем количество данных на странице
+    const data = await dinamicModel(nameCollection)
+      .find(filter)
+      .sort({ date: 1 }) // Сортировка: от самой ранней даты к более поздним
+      .skip((page - 1) * limit) // Пропускаем элементы, которые не попадали на текущую страницу
+      .limit(Number(limit)); // Ограничиваем количество данных на странице
 
-  const total = await dinamicModel(nameCollection).countDocuments(filter); // Получаем общее количество документов
-  const totalPages = Math.ceil(total / limit); // Общее количество страниц
+    const total = await dinamicModel(nameCollection).countDocuments(filter); // Получаем общее количество документов
+    const totalPages = Math.ceil(total / limit); // Общее количество страниц
 
-  return {
-    data,
-    totalPages,
-    currentPage: page,
-    total,
-  };
+    return {
+      data,
+      totalPages,
+      currentPage: page,
+      total,
+    };
+  } else {
+    const startOfMonth = dayjs().startOf("month").format("YYYY-MM-DD");
+
+    let filter = {};
+    if (date === "uncleaned") {
+      filter = {
+        "checked.isDone": false,
+        date: {
+          $lte: dayjs().format("YYYY-MM-DD"),
+        },
+      };
+    } else {
+      filter = {
+        date: {
+          $gte: startOfMonth,
+        },
+      };
+    }
+
+    const data = await dinamicModel(nameCollection)
+      .find(filter)
+      .sort({ date: 1 }) // Сортировка: от самой ранней даты к более поздним
+      .skip((page - 1) * limit) // Пропускаем элементы, которые не попадали на текущую страницу
+      .limit(Number(limit)); // Ограничиваем количество данных на странице
+
+    const total = await dinamicModel(nameCollection).countDocuments(filter); // Получаем общее количество документов
+    const totalPages = Math.ceil(total / limit); // Общее количество страниц
+    return {
+      data,
+      totalPages,
+      currentPage: page,
+      total,
+    };
+  }
 };
 
 export const allSchedulesByRoom = async ({

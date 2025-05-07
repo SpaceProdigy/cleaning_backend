@@ -24,7 +24,7 @@ bot
     console.error("Error setting webhook:", error);
   });
 
-console.log("🤖 Бот успешно запущен!");
+console.log("🤖 Bot successfully run!");
 
 bot.on("document", async (msg) => {
   try {
