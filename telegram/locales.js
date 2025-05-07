@@ -1,6 +1,6 @@
 export const corridorChatMap = {
-  blueCorridor: -1002236250541, // Группа для синиего коридора
-  kitchen4: -1002166625361, // Группа для кухни 4
+  blueCorridor: -1002270137153, // Группа для синиего коридора
+  kitchen4: -1002509818103, // Группа для кухни 4
 };
 
 export const corridors = [

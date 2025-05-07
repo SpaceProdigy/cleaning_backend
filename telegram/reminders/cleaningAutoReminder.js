@@ -2,21 +2,7 @@ import dayjs from "dayjs";
 import { dinamicModel } from "../../models/cleaningSchedules.js";
 import { messageBlueCorridor } from "./messages.js";
 import { bot } from "../telegram-bot.js";
-
-const corridorChatMap = {
-  blueCorridor: -1002236250541, // Группа для синиего коридора
-  kitchen4: -1002166625361, // Группа для кухни 4
-};
-
-const corridors = [
-  "blueCorridor",
-  "redCorridor",
-  "yellowCorridor",
-  "kitchen3",
-  "kitchen4",
-  "kitchen5",
-  "kitchen6",
-];
+import { corridorChatMap, corridors } from "../locales.js";
 
 const options = {
   parse_mode: "HTML",
