@@ -30,15 +30,23 @@ bot.on("document", async (msg) => {
   try {
     await handleDocumentUpload(msg, bot, TELEGRAM_BOT_KEY);
   } catch (error) {
-    console.error("Ошибка в обработке documet:", error);
+    console.error("Ошибка в обработке document:", error);
   }
 });
 
 bot.on("message", async (msg) => {
   try {
-    await getID(msg, bot);
-    await handleTextCleaningMessage(msg, bot);
-    await handleTextLessonsMessage(msg, bot);
+    const chatType = msg.chat.type;
+    const isGroup = chatType === "group" || chatType === "supergroup";
+
+    if (msg.text === "/id") {
+      await getID(msg, bot);
+    }
+
+    if (!isGroup) {
+      await handleTextCleaningMessage(msg, bot);
+      await handleTextLessonsMessage(msg, bot);
+    }
   } catch (error) {
     console.error("Ошибка в обработке сообщения:", error);
   }
@@ -46,7 +54,11 @@ bot.on("message", async (msg) => {
 
 bot.onText(/\/start/, async (msg) => {
   try {
-    await handleStartCommand(msg, bot);
+    const chatType = msg.chat.type;
+    const isGroup = chatType === "group" || chatType === "supergroup";
+    if (!isGroup) {
+      await handleStartCommand(msg, bot);
+    }
   } catch (error) {
     console.error("Ошибка в обработке команды /start:", error);
   }
@@ -54,7 +66,9 @@ bot.onText(/\/start/, async (msg) => {
 
 bot.on("channel_post", async (msg) => {
   try {
-    await getChannelID(msg, bot);
+    if (msg.text === "/id") {
+      await getChannelID(msg, bot);
+    }
   } catch (error) {
     console.error("Ошибка в обработке поста в канале:", error);
   }
