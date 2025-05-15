@@ -33,6 +33,7 @@ export const botMessages = ({ lang, notifyType, text }) => {
 
       cleaningList: "🧹 Переглянутий список прибирань",
       lesonsList: "🔔 Переглянутий список уроків",
+      busSchedule: "🚌 Розклад автобуса",
       alreadyProcessed: "⏳ Ваш запит уже обробляється, зачекайте...",
       processingRequest: "🔄 Обробка вашого запиту, зачекайте...",
       processingRequestCorridorTask: `📋 Завдання для <b>${text}</b> завантажуються...`,
@@ -55,6 +56,7 @@ I can show you the schedule, or you can view it in the web application.
 `,
       cleaningList: "🧹 Revised cleaning list",
       lesonsList: "🔔 Revised list of lessons",
+      busSchedule: "🚌 Bus schedule",
       alreadyProcessed:
         "⏳ Your request is already being processed, please wait...",
       processingRequest: "🔄 Processing your request, please wait...",

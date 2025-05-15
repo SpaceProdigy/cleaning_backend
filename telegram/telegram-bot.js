@@ -2,6 +2,7 @@ import TelegramBot from "node-telegram-bot-api";
 import dotenv from "dotenv";
 import {
   handleStartCommand,
+  handleTextBusMessage,
   handleTextCleaningMessage,
   handleTextLessonsMessage,
 } from "./handlers/messageHandlers.js";
@@ -59,6 +60,7 @@ bot.on("message", async (msg) => {
 
     await handleTextCleaningMessage(msg, bot);
     await handleTextLessonsMessage(msg, bot);
+    await handleTextBusMessage(msg, bot);
   } catch (error) {
     console.error("Ошибка в обработке сообщения:", error);
   }

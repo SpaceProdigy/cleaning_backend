@@ -68,6 +68,7 @@ export const handleStartCommand = async (msg, bot) => {
           keyboard: [
             [{ text: botMessages({ lang, notifyType: "cleaningList" }) }],
             [{ text: botMessages({ lang, notifyType: "lesonsList" }) }],
+            [{ text: botMessages({ lang, notifyType: "busSchedule" }) }],
           ],
           resize_keyboard: true,
           one_time_keyboard: true,
@@ -359,6 +360,52 @@ ${notes ? `<b>🗒️ Notes:</b> ${notes}` : ""}
           )
           .join("\n\n")}`,
         { parse_mode: "HTML" }
+      );
+    }
+  } catch (error) {
+    bot.sendMessage(chatId, botMessages({ lang, notifyType: "errorText" }));
+    console.error(error);
+  } finally {
+    processingRequests.delete(chatId);
+  }
+};
+
+export const handleTextBusMessage = async (msg, bot) => {
+  const chatId = msg.chat.id;
+  const text = msg.text;
+  let lang = msg.from.language_code;
+
+  if (lang === "ru" || lang === "ua") {
+    lang = "ua";
+  } else {
+    lang = "en";
+  }
+
+  if (processingRequests.has(chatId)) {
+    return bot.sendMessage(
+      chatId,
+      botMessages({ lang, notifyType: "alreadyProcessed" })
+    );
+  }
+
+  processingRequests.add(chatId);
+
+  await delay(standartDelay);
+
+  try {
+    if (text === botMessages({ lang, notifyType: "busSchedule" })) {
+      const lessonsOptions = getLessonsOptions(lang);
+
+      await bot.sendAnimation(
+        chatId,
+        "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGl6eGIzNGYxcGE3cTFjdWx2MGFmZDV5Y3RkMnV3ZGx3OWZyYTY2ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/eBgE4z0u02raxuyUlc/giphy.gif"
+      );
+
+      await delay(standartDelay + 1000);
+
+      return bot.sendPhoto(
+        chatId,
+        "https://res.cloudinary.com/dajlyi3lg/image/upload/v1747270150/photo_2025-04-16_14-07-00_x4zgsy.jpg"
       );
     }
   } catch (error) {
