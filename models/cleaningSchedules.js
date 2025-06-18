@@ -5,14 +5,14 @@ import { handleSaveError, runValidatePreUpdate } from "./hooks.js";
 export const cleaningSchemaJoi = Joi.object({
   date: Joi.string().required(),
   task: Joi.object().required(),
-  roomNumber: Joi.number().required(),
+  roomNumber: Joi.string().required(),
   adder: Joi.object().required(),
 });
 
 export const cleaningSchemaJoiPart = Joi.object({
   date: Joi.string(),
   task: Joi.object(),
-  roomNumber: Joi.number(),
+  roomNumber: Joi.string(),
   editor: Joi.object(),
   checked: Joi.object(),
 });
@@ -24,7 +24,7 @@ const cleaningSchema = new Schema(
       require: true,
     },
     roomNumber: {
-      type: Number,
+      type: String,
       require: true,
     },
     task: {
